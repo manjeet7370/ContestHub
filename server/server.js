@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const authMiddlewere = require("./middleware/authMiddleware")
 
 const authRoutes = require("./routes/authRoutes")
 
@@ -11,6 +12,12 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
+app.get("/profile", authMiddlewere, (req, res) => {
+    res.json({
+        message: "profile Accessed",
+        user: req.user,
+    });
+})
 
 app.get("/", (req, res) => {
     res.send("ContestHub Backend Running");
