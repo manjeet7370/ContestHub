@@ -4,6 +4,7 @@ const cors = require("cors");
 const authMiddlewere = require("./middleware/authMiddleware")
 
 const authRoutes = require("./routes/authRoutes")
+const contestRoutes = require("./routes/contestRoutes")
 
 const app = express()
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/contest", contestRoutes);
 
 app.get("/profile", authMiddlewere, (req, res) => {
     res.json({
