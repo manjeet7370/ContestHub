@@ -34,4 +34,18 @@ model Contest {
   createdAt   DateTime @default(now())
   createdById Int
   createdBy   client   @relation(fields: [createdById], references: [id])
+
+  problem Problem[]
+}
+
+model Problem {
+  id         Int   @id @default(autoincrement())
+  title      String
+  statement  String
+  difficulty String
+
+  contestId  Int
+  contest     Contest @relation(fields: [contestId], references: [id])
+  creadedAt DateTime @default(now())
+
 }

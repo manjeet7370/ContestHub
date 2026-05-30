@@ -5,6 +5,7 @@ const authMiddlewere = require("./middleware/authMiddleware")
 
 const authRoutes = require("./routes/authRoutes")
 const contestRoutes = require("./routes/contestRoutes")
+const problemRoutes = require("./routes/problemRoutes")
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/contest", contestRoutes);
+app.use("/api/problem", problemRoutes)
 
 app.get("/profile", authMiddlewere, (req, res) => {
     res.json({

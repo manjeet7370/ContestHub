@@ -95,4 +95,26 @@ router.post("/create", authMiddleware, async(req, res) => {
     }
 });
 
+router.get("/:id/problems", async (req , res) => {
+    try{
+        const {id} = req.params
+
+        const problems = await prisma.problem.findMany({
+            where: {
+                contestId: Number(id)
+            }
+        });
+
+        return res.status(200).json({
+            problems
+        });
+    }catch(err){
+        console.log(err)
+
+        return res.status(500).json({
+            message: "Server Error"
+        });
+    }
+});
+
 module.exports = router;
