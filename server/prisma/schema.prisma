@@ -21,6 +21,7 @@ model client {
   createdAt DateTime @default(now())
 
   contests Contest[]
+  submissions Submission[]
 }
 
 model Contest {
@@ -46,6 +47,21 @@ model Problem {
 
   contestId  Int
   contest     Contest @relation(fields: [contestId], references: [id])
-  creadedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  submissions Submission[]
 
+}
+
+model Submission {
+  id           Int  @id @default(autoincrement())
+
+  code         String
+  language     String
+  verdict      String @default("PENDING")
+
+  userId       Int
+  problemId    Int
+
+  user         client @relation(fields: [userId], references: [id])
+  problem      Problem @relation(fields: [problemId], references: [id])
 }

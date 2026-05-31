@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
                 createdAt: "desc"
             }
         });
+        
         return res.status(200).json(contests);
     }catch(err){
         console.log(err);
