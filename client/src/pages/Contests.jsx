@@ -1,6 +1,7 @@
 import  { useEffect , useState} from "react"
 import api from "../services/api"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Contests() {
     const [contest, setContest] = useState([]);
@@ -26,6 +27,9 @@ function Contests() {
             <p>{contest.description}</p>
         </div>
       ))}
+      <Link to={`/contest/${contest.id}`}>
+      <h2>{contest.title}</h2>
+      </Link>
     </div>
   );
 }

@@ -1,13 +1,14 @@
+import {Routes , Route} from "react-router-dom"
 import Contests from "./pages/Contests";
+import ContestsDeatils from "./pages/ContestDetails";
 
 
 function App() {
   return (
-    <div>
-      <h1>ContestHub</h1>
-      <p>Frontend setup completed 🚀</p>
-      <Contests/>
-    </div>
+      <Routes>
+        <Route path="/" element={<Contests/>} />
+        <Route path="/contest/:id" element={<ContestsDeatils/>} />
+      </Routes>
   );
 }
 
