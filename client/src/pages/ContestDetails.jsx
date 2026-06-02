@@ -39,11 +39,12 @@ function ContestsDeatils() {
                  <h3>{problem.title}</h3>
                 </Link>
                 <p>{problem.description}</p>
-                <p>{problem.statement}</p>
+                {/* <p>{problem.statement}</p> */}
                 <p>{problem.difficulty}</p>
             </div>
            ))}
         </div>
+        
     )
 }
 
