@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api"
+import { Link } from "react-router-dom";
 
 function ContestsDeatils() {
     const {id} = useParams();
@@ -11,8 +12,8 @@ function ContestsDeatils() {
         const fetchContest = async () => {
             try {
                 const res = await api.get(`/contest/${id}`);
-                console.log(res.data)
-                setContest(res.data)
+                console.log(res.data.contest)
+         
                 setContest(res.data.contest)
             }catch(err){
                 console.log(err)
@@ -30,6 +31,18 @@ function ContestsDeatils() {
            <h1>{contest.title}</h1>
 
            <p>{contest.description}</p>
+
+           <h2>Problem</h2>
+           {contest.problem?.map((problem) => (
+            <div key={problem.id}>
+                <Link to={`/problem/${problem.id}`}>
+                 <h3>{problem.title}</h3>
+                </Link>
+                <p>{problem.description}</p>
+                <p>{problem.statement}</p>
+                <p>{problem.difficulty}</p>
+            </div>
+           ))}
         </div>
     )
 }

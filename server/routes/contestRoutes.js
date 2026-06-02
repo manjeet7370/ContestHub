@@ -31,6 +31,9 @@ router.get("/:id", async (req, res) => {
             where: {
                 id : Number(id),
             },
+            include: {
+                problem: true
+            }
         });
 
         if(!contest){
