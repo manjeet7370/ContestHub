@@ -1,9 +1,12 @@
 import { useState } from "react";
 import api from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
+
+    const nevigate = useNavigate();
 
     const handleLogin = async () => {
         try{
@@ -12,7 +15,12 @@ function Login(){
                 password,
             })
 
+
             console.log(res.data)
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user))
+
+            nevigate("/");
         }catch(err){
             console.log(err)
         }
