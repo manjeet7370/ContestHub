@@ -1,8 +1,22 @@
 import { useState } from "react";
+import api from "../services/api";
 
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
+
+    const handleLogin = async () => {
+        try{
+            const res = await api.post("/auth/login", {
+                email,
+                password,
+            })
+
+            console.log(res.data)
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     return (
         <div>
@@ -28,7 +42,8 @@ function Login(){
               <br />
               <br />
 
-              <button>Login</button>
+              <button onClick={handleLogin}
+              >Login</button>
         </div>
     );
 }
