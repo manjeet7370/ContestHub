@@ -5,6 +5,7 @@ import ProblemDeatils from "./pages/ProblemDetails";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import MySubmissions from "./pages/MySubmissions";
+import Register from "./pages/Register";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/problem/:id" element={<ProblemDeatils/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/submissions" element = {<MySubmissions/>} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
       </>
   );

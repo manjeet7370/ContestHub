@@ -20,7 +20,11 @@ function Navbar(){
                   <button onClick={handleLogout}>Logout</button>
                 </> 
             ) : (
+                <>
                 <Link to={"/login"}>Login</Link>
+                {"  |  "}
+                <Link to={"/register"}>Register</Link>
+            </>
             )}
         </nav>
     )

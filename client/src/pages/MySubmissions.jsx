@@ -10,13 +10,13 @@ function MySubmissions() {
                 const token = localStorage.getItem("token");
 
                 const res = await api.get("/submission/my", {
-                    header: {
+                    headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
                 console.log(res.data)
-                setSubmissions(res.data.submissions);
+                setSubmissions(res.data.submission);
             }catch(err){
                 console.log(err);
             }
