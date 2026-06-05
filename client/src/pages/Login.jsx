@@ -1,12 +1,12 @@
 import { useState } from "react";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
 
-    const nevigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try{
@@ -20,7 +20,7 @@ function Login(){
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user))
 
-            nevigate("/");
+            navigate("/");
         }catch(err){
             console.log(err)
         }
@@ -52,6 +52,9 @@ function Login(){
 
               <button onClick={handleLogin}
               >Login</button>
+              <p>
+               Don't have account ? <Link to="/register">Register</Link>
+              </p>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../services/api"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
  
 function Register() {
     const [name, setName] = useState("");
@@ -56,6 +56,11 @@ function Register() {
              <button onClick={handleRegister}>
                 Register
              </button>
+
+             <br />
+             <p>
+                Already have an account ? <Link to="/login">Login</Link>
+             </p>
 
         </div>
 

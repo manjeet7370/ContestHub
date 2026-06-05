@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import MySubmissions from "./pages/MySubmissions";
 import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Route path="/contest/:id" element={<ContestsDeatils/>} />
         <Route path="/problem/:id" element={<ProblemDeatils/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/submissions" element = {<MySubmissions/>} />
+        <Route path="/submissions" element = {<ProtectedRoute> <MySubmissions/> </ProtectedRoute> } />
         <Route path="/register" element={<Register/>} />
       </Routes>
       </>
