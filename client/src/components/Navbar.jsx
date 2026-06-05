@@ -16,7 +16,7 @@ function Navbar(){
           
             {token ? (
                 <>
-                  <Link to="/submission">My Submission</Link> {"  |  "}
+                  <Link to="/submissions">My Submission</Link> {"  |  "}
                   <button onClick={handleLogout}>Logout</button>
                 </> 
             ) : (

@@ -4,6 +4,7 @@ import ContestsDeatils from "./pages/ContestDetails";
 import ProblemDeatils from "./pages/ProblemDetails";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+import MySubmissions from "./pages/MySubmissions";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/contest/:id" element={<ContestsDeatils/>} />
         <Route path="/problem/:id" element={<ProblemDeatils/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/submissions" element = {<MySubmissions/>} />
       </Routes>
       </>
   );
