@@ -18,20 +18,39 @@ function Contests() {
         };
         fetchContests();
     }, []);
-  return (
-    <div>
-      <h1>All Contests</h1>
+return (
+  <div className="max-w-5xl mx-auto p-6">
+    
+    <h1 className="text-3xl font-bold mb-6">
+      All Contests
+    </h1>
+
+    <div className="grid gap-4">
       {contest.map((contest) => (
-        <div key={contest.id}>
-            <h2>{contest.title}</h2>
-            <p>{contest.description}</p>
+        <div
+          key={contest.id}
+          className="border rounded-lg p-5 shadow-md hover:shadow-lg transition"
+        >
+          <h2 className="text-xl font-semibold">
+            {contest.title}
+          </h2>
+
+          <p className="text-gray-600 mt-2">
+            {contest.description}
+          </p>
+
+          <Link
+            to={`/contest/${contest.id}`}
+            className="inline-block mt-4 text-blue-600 font-medium"
+          >
+            View Contest →
+          </Link>
         </div>
       ))}
-      <Link to={`/contest/${contest.id}`}>
-      <h2>{contest.title}</h2>
-      </Link>
     </div>
-  );
+
+  </div>
+);
 }
 
 export default Contests;

@@ -21,6 +21,7 @@ function App() {
         <Route path="/submissions" element = {<ProtectedRoute> <MySubmissions/> </ProtectedRoute> } />
         <Route path="/register" element={<Register/>} />
       </Routes>
+      
       </>
   );
 }

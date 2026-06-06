@@ -24,48 +24,58 @@ function Register() {
         }
     };
 
-    return (
-        <div>
-            <h2>Register</h2>
+return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
 
-            <input type="text"
-              placeholder="Enter Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-             />
-             <br />
-             <br />
-
-             <input type="email"
-             placeholder="Enter Email"
-             value={email}
-             onChange={(e) => setEmail(e.target.value)} 
-             />
-             <br />
-             <br />
-
-            <input type="password"
-             placeholder="Enter Password"
-             value={password}
-             onChange={(e) => setPassword(e.target.value)} 
-             />
-
-             <br />
-             <br />
-
-             <button onClick={handleRegister}>
+            <h2 className="text-3xl font-bold text-center mb-6">
                 Register
-             </button>
+            </h2>
 
-             <br />
-             <p>
-                Already have an account ? <Link to="/login">Login</Link>
-             </p>
+            <input
+                type="text"
+                placeholder="Enter Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full border rounded p-2 mb-4"
+            />
+
+            <input
+                type="email"
+                placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border rounded p-2 mb-4"
+            />
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border rounded p-2 mb-4"
+            />
+
+            <button
+                onClick={handleRegister}
+                className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            >
+                Register
+            </button>
+
+            <p className="text-center mt-4">
+                Already have an account?{" "}
+                <Link
+                    to="/login"
+                    className="text-blue-600 hover:underline"
+                >
+                    Login
+                </Link>
+            </p>
 
         </div>
-
-
-    );
+    </div>
+);
 
 
 }
