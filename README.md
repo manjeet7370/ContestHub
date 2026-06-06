@@ -29,10 +29,10 @@ ContestHub enables users to browse contests, view problems, and submit solutions
 - Modern UI for Home, Contest, Problem, Login, Register, and Submission pages
 - PostgreSQL database integration using Prisma ORM
 - React Router based client-side navigation
+- UI polish and responsiveness improvements
 
 ### 🚧 In Progress
 
-- UI polish and responsiveness improvements
 - Verdict badge enhancements
 - Submission history improvements
 
