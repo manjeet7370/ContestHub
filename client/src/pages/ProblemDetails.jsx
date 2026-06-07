@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
+import Editor from "@monaco-editor/react";
 
 function ProblemDeatils (){
 
@@ -8,7 +9,32 @@ function ProblemDeatils (){
 
     const [problem, setProblem] = useState(null);
     const [language, setLanguage] = useState("Python");
-    const [code, setCode] = useState("")
+    
+
+    const templates = {
+      JavaScript: `function solve() {
+
+
+  }
+
+solve();`,
+
+      Python: `def solve():
+      pass
+      
+      
+ solve()`,
+
+      "C++": `#include <bits/stdc++.h>
+using namespace std;
+      
+  int main() {
+    
+        
+    return 0;
+  }`,
+    };
+    const [code, setCode] = useState(templates["Python"]);
 
     useEffect(() => {
         const fetchContest = async () => {
@@ -27,6 +53,11 @@ function ProblemDeatils (){
     if(!problem){
         return <h2>Loading</h2>
     }
+  const editorLanguage = {
+     JavaScript: "javascript",
+     Python: "python",
+     "C++": "cpp"
+  };
 
    const  handleSubmit  = async () => {
       
@@ -98,7 +129,16 @@ return (
             <select
               id="language-select"
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={(e) => {
+                const setlectedLanguage = e.target.value;
+                setLanguage(setlectedLanguage);
+
+                
+                  setCode(templates[setlectedLanguage]);
+                
+
+              }
+            }
               className="bg-white border border-slate-300 text-slate-700 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="JavaScript">JavaScript</option>
@@ -138,12 +178,18 @@ return (
         {/* Editor */}
         <div className="flex-grow bg-[#0f172a] p-5">
 
-          <textarea
+          <Editor
+            height="100%"
+            theme="vs-dark"
+            language={editorLanguage[language]}
             value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="// Write your code here..."
-            spellCheck="false"
-            className="w-full h-full bg-transparent text-slate-200 font-mono text-[15px] leading-7 resize-none focus:outline-none placeholder-slate-500"
+            onChange={(value) => setCode(value || "")}
+            options={{
+              minimap: {enabled: false},
+              fontSize: 15,
+              automaticLayout: true,
+              scrollBeyondLastLine: false
+            }}
           />
 
         </div>
