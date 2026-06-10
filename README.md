@@ -1,14 +1,25 @@
 # ContestHub
 
-A full-stack competitive coding contest platform inspired by platforms like Codeforces and LeetCode. ContestHub allows users to participate in coding contests, solve problems, and submit solutions through a secure authentication system.
+A full-stack competitive programming platform inspired by CodeChef, LeetCode, and Codeforces. ContestHub allows users to participate in coding contests, solve programming problems, submit solutions, and track submissions through a secure authentication and authorization system.
 
-> ⚠️ **Status:** Active development. Core platform is functional with authentication, protected routes, contest browsing, problem solving, submissions, and a Tailwind-based UI. Judge0 integration, leaderboard, Redis caching, and deployment are the next major milestones.
+> ⚠️ **Status:** Active Development. Core platform is functional with authentication, RBAC, contest management, problem browsing, submissions, admin dashboard, and contest creation. Judge0 integration, automated verdicts, leaderboards, Redis caching, and deployment are the next major milestones.
 
 ---
 
-## What it does
+## Overview
 
-ContestHub enables users to browse contests, view problems, and submit solutions through a complete end-to-end workflow. The long-term goal is to support live code execution, real-time leaderboards, Redis caching, Dockerized deployment, and a scalable production-ready architecture.
+ContestHub is designed to simulate a real-world competitive programming platform where users can participate in coding contests while administrators can manage contests and problems.
+
+The long-term vision includes:
+
+* Online code execution using Judge0
+* Automated verdict generation
+* Hidden test cases
+* Contest leaderboards
+* User rankings
+* Redis caching
+* Dockerized deployment
+* Scalable production architecture
 
 ---
 
@@ -16,64 +27,160 @@ ContestHub enables users to browse contests, view problems, and submit solutions
 
 ### ✅ Completed
 
-- JWT-based authentication (Register/Login/Logout)
-- Protected backend APIs using JWT middleware
-- Protected frontend routes
-- Contest listing and contest details pages
-- Problem detail page with coding workspace
-- End-to-end code submission workflow
-- My Submissions dashboard
-- Authentication persistence using localStorage
-- Responsive navigation bar
-- Tailwind CSS integration
-- Modern UI for Home, Contest, Problem, Login, Register, and Submission pages
-- PostgreSQL database integration using Prisma ORM
-- React Router based client-side navigation
-- UI polish and responsiveness improvements
+#### Authentication & Security
+
+* User Registration
+* User Login
+* User Logout
+* JWT Authentication
+* Password Hashing using bcrypt
+* Authentication Persistence using localStorage
+* Protected Backend APIs
+* Protected Frontend Routes
+
+#### Authorization
+
+* Role-Based Access Control (RBAC)
+* User Role Support
+
+  * USER
+  * ADMIN
+* Admin-only Routes
+* Admin Middleware Protection
+
+#### Contest Management
+
+* Contest Listing
+* Contest Details Page
+* Contest Creation (Admin)
+* Contest Browsing
+
+#### Problem Management
+
+* Problem Details Page
+* Problem Viewing
+* Contest-wise Problem Organization
+
+#### Submission System
+
+* Code Submission Workflow
+* Submission Storage
+* My Submissions Dashboard
+* Submission History Tracking
+* Verdict Tracking (PENDING)
+
+#### Admin Panel
+
+* Admin Dashboard
+* Contest Creation Interface
+* Contest Management Workflow
+* Admin Navigation Access
+
+#### Frontend
+
+* React Router Navigation
+* Monaco Editor Integration
+* Language Templates
+* Responsive Navbar
+* Tailwind CSS UI
+* Modern Contest Pages
+* Modern Problem Workspace
+
+#### Database
+
+* PostgreSQL Integration
+* Prisma ORM
+* Relational Data Modeling
+
+---
 
 ### 🚧 In Progress
 
-- Verdict badge enhancements
-- Submission history improvements
+* Problem Creation Module
+* Admin Panel Enhancements
+* Contest Management Improvements
+* Submission UI Improvements
+
+---
 
 ### 📋 Planned
 
-- Judge0 integration for real-time code execution
-- Custom test case execution
-- Accepted / Wrong Answer / TLE verdict generation
-- Contest leaderboard
-- User profiles and statistics
-- Redis caching
-- API rate limiting
-- Role-based access control (Admin/User)
-- Docker support
-- CI/CD pipeline
-- Cloud deployment
+#### Judge0 Integration
+
+* Real-Time Code Execution
+* Multiple Language Support
+* Automated Verdict Generation
+
+Supported Verdicts:
+
+* Accepted (AC)
+* Wrong Answer (WA)
+* Time Limit Exceeded (TLE)
+* Memory Limit Exceeded (MLE)
+* Runtime Error (RTE)
+* Compilation Error (CE)
+
+#### Test Case System
+
+* Hidden Test Cases
+* Custom Inputs
+* Expected Outputs
+* Time Limits
+* Memory Limits
+
+#### Leaderboards
+
+* Contest Rankings
+* User Scores
+* Penalty Calculation
+* Live Standings
+
+#### Platform Enhancements
+
+* User Profiles
+* User Statistics
+* Contest History
+* Activity Tracking
+
+#### Infrastructure
+
+* Redis Caching
+* Rate Limiting
+* Queue Processing
+* Docker Support
+* CI/CD Pipeline
+* Cloud Deployment
 
 ---
 
 ## Key Highlights
 
-- Built a full-stack coding contest platform using React, Node.js, Express, Prisma, and PostgreSQL.
-- Implemented JWT-based authentication and authorization.
-- Developed RESTful APIs for contests, problems, and submissions.
-- Created an end-to-end submission workflow from frontend to database.
-- Designed a coding workspace inspired by modern competitive programming platforms.
-- Integrated protected routes and secure API access using JWT.
-- Planned scalability enhancements including Redis caching, Dockerization, and deployment.
+* Built a full-stack competitive programming platform inspired by CodeChef, LeetCode, and Codeforces.
+* Implemented secure JWT-based authentication and authorization.
+* Developed Role-Based Access Control (RBAC) using Admin and User roles.
+* Built RESTful APIs using Express.js and Prisma ORM.
+* Developed contest management and submission tracking workflows.
+* Integrated Monaco Editor with multi-language coding support.
+* Created a dedicated Admin Dashboard for platform management.
+* Designed scalable architecture for future Judge0, Redis, Docker, and deployment integration.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---------|------------|
-| Frontend | React, React Router DOM, Axios, Tailwind CSS |
-| Backend | Node.js, Express.js |
-| ORM | Prisma |
-| Database | PostgreSQL |
-| Authentication | JWT, bcrypt |
-| Version Control | Git, GitHub |
+| Layer           | Technology       |
+| --------------- | ---------------- |
+| Frontend        | React.js         |
+| Routing         | React Router DOM |
+| Styling         | Tailwind CSS     |
+| HTTP Client     | Axios            |
+| Code Editor     | Monaco Editor    |
+| Backend         | Node.js          |
+| Framework       | Express.js       |
+| Database        | PostgreSQL       |
+| ORM             | Prisma ORM       |
+| Authentication  | JWT, bcrypt      |
+| Version Control | Git, GitHub      |
 
 ---
 
@@ -81,30 +188,32 @@ ContestHub enables users to browse contests, view problems, and submit solutions
 
 ```text
 ContestHub/
+│
 ├── client/
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   └── ProtectedRoute.jsx
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── Contests.jsx
-│   │   │   ├── ContestDetails.jsx
-│   │   │   ├── ProblemDetails.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
-│   │   │   └── MySubmissions.jsx
-│   │   │
-│   │   ├── services/
-│   │   │   └── api.js
-│   │   │
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
 │   │
-│   └── package.json
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   └── ProtectedRoute.jsx
+│   │
+│   ├── pages/
+│   │   ├── Contests.jsx
+│   │   ├── ContestDetails.jsx
+│   │   ├── ProblemDetails.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── MySubmissions.jsx
+│   │   └── AdminDashboard.jsx
+│   │
+│   ├── services/
+│   │   └── api.js
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
 │
 └── server/
+    │
     ├── prisma/
     │   ├── schema.prisma
     │   └── prismaClient.js
@@ -113,26 +222,104 @@ ContestHub/
     │   ├── authRoutes.js
     │   ├── contestRoutes.js
     │   ├── problemRoutes.js
-    │   └── submissionRoutes.js
+    │   ├── submissionRoutes.js
+    │   └── adminRoutes.js
     │
     ├── middleware/
-    │   └── authMiddleware.js
+    │   ├── authMiddleware.js
+    │   └── adminMiddleware.js
     │
     └── index.js
 ```
 
 ---
 
-## Getting Started
+## Current Workflow
 
-### Prerequisites
+### User Flow
 
-- Node.js v18+
-- PostgreSQL
+```text
+Register
+   ↓
+Login
+   ↓
+Browse Contests
+   ↓
+Open Contest
+   ↓
+Open Problem
+   ↓
+Write Code
+   ↓
+Submit Solution
+   ↓
+View Submission History
+```
+
+### Admin Flow
+
+```text
+Admin Login
+      ↓
+Admin Dashboard
+      ↓
+Create Contest
+      ↓
+Create Problems
+      ↓
+Users Participate
+```
 
 ---
 
-## Backend Setup
+## API Overview
+
+### Authentication
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/auth/register |
+| POST   | /api/auth/login    |
+
+### Contests
+
+| Method | Endpoint         |
+| ------ | ---------------- |
+| GET    | /api/contest     |
+| GET    | /api/contest/:id |
+
+### Problems
+
+| Method | Endpoint         |
+| ------ | ---------------- |
+| GET    | /api/problem/:id |
+
+### Submissions
+
+| Method | Endpoint               |
+| ------ | ---------------------- |
+| POST   | /api/submission/create |
+| GET    | /api/submission/my     |
+
+### Admin
+
+| Method | Endpoint                  |
+| ------ | ------------------------- |
+| GET    | /api/admin/dashboard      |
+| POST   | /api/admin/contest/create |
+| POST   | /api/admin/problem/create |
+
+Protected Routes Require:
+
+```http
+Authorization: Bearer <token>
+```
+
+---
+
+## Getting Started
+
+### Backend Setup
 
 ```bash
 cd server
@@ -147,19 +334,19 @@ JWT_SECRET="your_secret_key"
 PORT=5000
 ```
 
-Run migrations:
+Run Prisma Migration:
 
 ```bash
 npx prisma migrate dev
 ```
 
-Start server:
+Start Backend:
 
 ```bash
 npm run dev
 ```
 
-Backend runs on:
+Backend:
 
 ```text
 http://localhost:5000
@@ -167,7 +354,7 @@ http://localhost:5000
 
 ---
 
-## Frontend Setup
+### Frontend Setup
 
 ```bash
 cd client
@@ -175,47 +362,10 @@ npm install
 npm run dev
 ```
 
-Frontend runs on:
+Frontend:
 
 ```text
 http://localhost:5173
-```
-
----
-
-## API Overview
-
-### Authentication
-
-| Method | Endpoint |
-|----------|----------|
-| POST | /api/auth/register |
-| POST | /api/auth/login |
-
-### Contests
-
-| Method | Endpoint |
-|----------|----------|
-| GET | /api/contest |
-| GET | /api/contest/:id |
-
-### Problems
-
-| Method | Endpoint |
-|----------|----------|
-| GET | /api/problem/:id |
-
-### Submissions
-
-| Method | Endpoint |
-|----------|----------|
-| POST | /api/submission/create |
-| GET | /api/submission/my |
-
-Protected endpoints require:
-
-```http
-Authorization: Bearer <token>
 ```
 
 ---
@@ -225,30 +375,37 @@ Authorization: Bearer <token>
 ```text
 Phase 1 ✅
 Authentication
+RBAC
 Protected Routes
 Contest Management
-Problem Management
+Problem Browsing
 Submission Workflow
+Admin Dashboard
+Contest Creation
 Tailwind UI
 
 Phase 2 🚧
-UI Polish
-Submission Enhancements
+Problem Creation
+Contest Editing
+Contest Deletion
+Submission Improvements
 
 Phase 3 📋
 Judge0 Integration
 Custom Test Cases
-Automated Verdicts
+Automated Verdict Generation
 
 Phase 4 📋
 Leaderboard
 Contest Rankings
 User Profiles
+User Statistics
 
 Phase 5 📋
-Redis Caching
+Redis
+Caching
 Rate Limiting
-Role-Based Access Control
+Queue Processing
 
 Phase 6 📋
 Docker
@@ -261,17 +418,38 @@ Cloud Deployment
 ## Current Progress
 
 ```text
-Backend        ~85%
-Frontend Logic ~90%
-UI             ~75%
-Overall        ~80%
+Authentication      100%
+RBAC                100%
+Contest System      90%
+Problem System      90%
+Submission System   80%
+Admin Panel         75%
+Judge0              0%
+
+Backend             ~88%
+Frontend Logic      ~92%
+UI                  ~80%
+
+Overall Progress    ~85%
 ```
+
+---
+
+## Resume Highlights
+
+* Built a full-stack competitive programming platform inspired by CodeChef, LeetCode, and Codeforces.
+* Implemented secure JWT-based authentication and Role-Based Access Control (RBAC).
+* Designed REST APIs using Express.js and Prisma ORM.
+* Developed contest management, problem management, and submission tracking workflows.
+* Integrated Monaco Editor with multi-language coding support.
+* Built an Admin Dashboard for contest administration.
+* Architected the platform for future Judge0 integration, leaderboards, Redis caching, and Docker deployment.
 
 ---
 
 ## Contributing
 
-This project is currently being developed as a personal learning and portfolio project.
+This project is being developed as a personal learning, portfolio, and system design project.
 
 ---
 
