@@ -3,9 +3,11 @@ import { Link , useNavigate} from "react-router-dom";
 function Navbar(){
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        
         localStorage.removeItem("user");
         navigate("/login");
         // window.location.reload();
@@ -43,6 +45,15 @@ return (
                                 >
                                     My Submissions
                                 </Link> 
+
+                          {user?.role === "ADMIN" && (
+                               <Link
+                               to="/admin"
+                               className="text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200"
+                               >
+                                 Admin
+                            </Link>
+    )}
                                 <button 
                                     onClick={handleLogout}
                                     className="text-sm font-medium text-red-400 hover:text-red-300 bg-red-400/10 hover:bg-red-400/20 px-4 py-2 rounded-lg border border-transparent hover:border-red-500/30 transition-all duration-200"

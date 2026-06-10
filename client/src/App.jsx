@@ -7,9 +7,12 @@ import Navbar from "./components/Navbar";
 import MySubmissions from "./pages/MySubmissions";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import { Navigate } from "react-router-dom";
 
 
 function App() {
+    const user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <Navbar/>
@@ -20,6 +23,14 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/submissions" element = {<ProtectedRoute> <MySubmissions/> </ProtectedRoute> } />
         <Route path="/register" element={<Register/>} />
+        <Route
+          path="/admin"
+          element={
+          user?.role === "ADMIN"
+          ? <AdminDashboard />
+          : <Navigate to="/" />
+        }
+        /> 
       </Routes>
       
       </>
