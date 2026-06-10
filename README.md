@@ -229,7 +229,7 @@ ContestHub/
     │   ├── authMiddleware.js
     │   └── adminMiddleware.js
     │
-    └── index.js
+    └── server.js
 ```
 
 ---
