@@ -57,7 +57,43 @@ function AdminDashboard () {
             setLoading(false);
         }
     };
-  
+
+    const [problemTitle , setProblemTitle] = useState("");
+    const [statement, setStatement] = useState("");
+    const [difficulty, setDifficulty] = useState("Easy");
+    const [contestId, setContestId] = useState("");
+
+    const handleCreateProblem  = async () => {
+        try{
+            const token = localStorage.getItem("token");
+
+            const res = await api.post(
+                "/admin/problem/create",
+                {
+                    tittle : problemTitle,
+                    statement,
+                    difficulty,
+                    contestId: Number(contestId),
+                },
+                {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                }
+            );
+            alert("Problem Created Successfully");
+            setProblemTitle("");
+            setStatement("");
+            setDifficulty("Easy");
+            setContestId("");
+            console.log(res.data);
+
+            
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     return (
         
         <div className="max-w-3xl mx-auto p-6">
@@ -107,6 +143,70 @@ function AdminDashboard () {
           {loading ? "Creating..." : "Create Contest"}
         </button>
       </div>
+      <div className="bg-white shadow rounded-xl p-6 mt-6">
+      <h2 className="text-xl font-semibold mb-4">
+           Create Problem
+           </h2>
+
+        <input
+       type="text"
+       placeholder="Problem Title"
+       value={problemTitle}
+       onChange={(e) =>
+       setProblemTitle(e.target.value)
+      }
+     className="w-full border p-3 rounded mb-3"
+      />
+
+  <textarea
+    placeholder="Problem Statement"
+    value={statement}
+    onChange={(e) =>
+      setStatement(e.target.value)
+    }
+    className="w-full border p-3 rounded mb-3"
+  />
+
+  <select
+    value={difficulty}
+    onChange={(e) =>
+      setDifficulty(e.target.value)
+    }
+    className="w-full border p-3 rounded mb-3"
+  >
+    <option>Easy</option>
+    <option>Medium</option>
+    <option>Hard</option>
+  </select>
+
+  <select
+    value={contestId}
+    onChange={(e) =>
+      setContestId(e.target.value)
+    }
+    className="w-full border p-3 rounded mb-4"
+  >
+    <option value="">
+      Select Contest
+    </option>
+
+    {contests.map((contest) => (
+      <option
+        key={contest.id}
+        value={contest.id}
+      >
+        {contest.title}
+      </option>
+    ))}
+  </select>
+
+  <button
+    onClick={handleCreateProblem}
+    className="bg-green-600 text-white px-5 py-2 rounded"
+  >
+    Create Problem
+  </button>
+</div>
           <div className="mt-6">
     <h2 className="text-xl font-bold mb-2">
         Available Contests

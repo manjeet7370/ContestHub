@@ -12,7 +12,8 @@ import { Navigate } from "react-router-dom";
 
 
 function App() {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+  
   return (
     <>
       <Navbar/>
