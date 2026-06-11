@@ -6,11 +6,13 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("")
     const  [password, setPassword] = useState("")
+    const [error, setError] = useState("");
 
     const navigate = useNavigate();
 
     const handleRegister = async () => {
         try{
+            setError("")
             const res = await api.post("/auth/register", {
                 name,
                 email,
@@ -21,6 +23,10 @@ function Register() {
             navigate("/login");
         }catch(err){
             console.log(err);
+                    setError(
+              err.response?.data?.message ||
+            "Server error"
+           );
         }
     };
 
@@ -55,6 +61,11 @@ return (
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full border rounded p-2 mb-4"
             />
+            {error && (
+          <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded mb-4 text-sm">
+            {error}
+            </div>
+            )}
 
             <button
                 onClick={handleRegister}

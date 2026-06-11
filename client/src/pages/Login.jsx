@@ -8,8 +8,13 @@ function Login(){
 
     const navigate = useNavigate();
 
+    const [error, setError] = useState("");
+
+
+
     const handleLogin = async () => {
         try{
+            setError("");
             const res = await api.post("/auth/login", {
                 email,
                 password,
@@ -22,9 +27,16 @@ function Login(){
 
             navigate("/");
         }catch(err){
-            console.log(err)
+            
+                    setError(
+            err.response?.data?.message ||
+            "Something went wrong"
+        );
         }
     }
+
+
+   
 
 return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -49,6 +61,11 @@ return (
                 onChange={(e) => setpassword(e.target.value)}
                 className="w-full border rounded p-2 mb-4"
             />
+            {error && (
+         <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded mb-4 text-sm">
+             {error}
+            </div>
+            )}
 
             <button
                 onClick={handleLogin}

@@ -49,6 +49,7 @@ model Problem {
   contest     Contest @relation(fields: [contestId], references: [id])
   createdAt DateTime @default(now())
   submissions Submission[]
+  testCases TestCase[]
 
 }
 
@@ -64,4 +65,20 @@ model Submission {
 
   user         client @relation(fields: [userId], references: [id])
   problem      Problem @relation(fields: [problemId], references: [id])
+}
+
+model TestCase {
+  id              Int      @id @default(autoincrement())
+
+  input           String
+  expectedOutput  String
+
+  explanation     String?
+
+  isSample        Boolean @default(false)
+
+  problemId       Int
+  problem         Problem @relation(fields: [problemId], references: [id])
+
+  createdAt       DateTime @default(now())
 }

@@ -127,5 +127,17 @@ router.get("/:id", async (req , res) => {
     }
 });
 
+router.get("/", async (req, res) => {
+    try{
+        const problems = await prisma.problem.findMany();
+        res.json(problems);
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: "Server Error",
+        });
+    }
+});
 
 module.exports = router;

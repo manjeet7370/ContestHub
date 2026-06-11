@@ -81,6 +81,46 @@ router.post("/problem/create", authMiddleware, adminMiddleware, async(req, res) 
     }
 })
 
+router.post("/testcase/create", authMiddleware, adminMiddleware, 
+    async (req , res) => {
+        try{
+            const {
+                problemId,
+                input,
+                expectedOutput,
+                explanation,
+            } = req.body;
+
+            const sampleCount = await prisma.testCase.count({
+                where: {
+                    problemId: Number(problemId),
+                    isSample: true,
+                },
+            })
+
+            const testCase = await prisma.testCase.create({
+                data: {
+                    problemId: Number(problemId),
+                    input,
+                    expectedOutput,
+                    explanation,
+                    isSample: sampleCount<3,
+                },
+            });
+
+            res.status(201).json({
+                message: "Test case created successfuly",
+                testCase,
+            });
+        }catch(err){
+            console.log(err);
+            res.status(500).json({
+                message: "Server Error",
+            });
+        }
+    }
+);
+
 
 module.exports = router;
 
