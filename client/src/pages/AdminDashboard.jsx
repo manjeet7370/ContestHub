@@ -70,7 +70,7 @@ function AdminDashboard () {
             const res = await api.post(
                 "/admin/problem/create",
                 {
-                    tittle : problemTitle,
+                    title : problemTitle,
                     statement,
                     difficulty,
                     contestId: Number(contestId),
