@@ -103,11 +103,18 @@ router.get("/:id", async (req , res) => {
         
         const {id} = req.params;
 
-        const problem = await prisma.problem.findUnique({
-            where : {
-                id : Number(id)
-            }
-        });
+    const problem = await prisma.problem.findUnique({
+         where: {
+            id: Number(id),
+        },
+        include: {
+        testCases: {
+            where: {
+                isSample: true,
+            },
+        },
+    },
+});
 
         if(!problem){
             return res.status(404).json({

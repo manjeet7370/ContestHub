@@ -214,280 +214,110 @@ function AdminDashboard() {
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 min-h-screen bg-slate-50 text-slate-800 font-sans">
-      <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-8">
-        Admin Dashboard
-      </h1>
+// Define these shared classes at the top of your component or file
+const inputBase = "w-full bg-slate-50 border border-slate-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-colors";
+const cardBase = "bg-white border border-slate-200 rounded-xl p-6 mb-6 shadow-sm";
+const btnBase = "px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-60 transition-colors w-full sm:w-auto";
+const sectionTitle = "text-xl font-bold text-slate-800 mb-5 border-b border-slate-100 pb-3";
 
-      {/* Create Contest Card */}
-      <div className="bg-white shadow-sm border border-slate-200 rounded-2xl p-6 sm:p-8 mb-8 transition-shadow hover:shadow-md">
-        <h2 className="text-xl font-semibold text-slate-800 mb-6 border-b border-slate-100 pb-4">
-          Create Contest
-        </h2>
+return (
+  <div className="max-w-5xl mx-auto p-4 sm:p-6 min-h-screen text-slate-800 font-sans">
+    <h1 className="text-3xl font-extrabold text-slate-900 mb-8">Admin Dashboard</h1>
 
-        <div className="space-y-5">
-          <input
-            type="text"
-            placeholder="Contest Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-3.5 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none"
-          />
-
-          <textarea
-            placeholder="Contest Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-3.5 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none resize-y"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div className="space-y-1.5">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider pl-1">
-                Start Time
-              </span>
-              <input
-                type="datetime-local"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-3 transition-colors hover:border-slate-400 outline-none"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider pl-1">
-                End Time
-              </span>
-              <input
-                type="datetime-local"
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-3 transition-colors hover:border-slate-400 outline-none"
-              />
-            </div>
+    {/* Create Contest */}
+    <div className={cardBase}>
+      <h2 className={sectionTitle}>Create Contest</h2>
+      <div className="space-y-4">
+        <input type="text" placeholder="Contest Title" value={title} onChange={(e) => setTitle(e.target.value)} className={inputBase} />
+        <textarea placeholder="Contest Description" value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={inputBase} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="text-xs font-semibold text-slate-500 uppercase mb-1 block">Start Time</label>
+            <input type="datetime-local" value={startTime} onChange={(e) => setStartTime(e.target.value)} className={inputBase} />
           </div>
-
-          <div className="pt-2">
-            <button
-              onClick={handleCreateContest}
-              disabled={loading}
-              className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]"
-            >
-              {loading ? "Creating..." : "Create Contest"}
-            </button>
+          <div>
+            <label className="text-xs font-semibold text-slate-500 uppercase mb-1 block">End Time</label>
+            <input type="datetime-local" value={endTime} onChange={(e) => setEndTime(e.target.value)} className={inputBase} />
           </div>
         </div>
-      </div>
-
-      {/* Create Problem & Test Cases Card */}
-      <div className="bg-white shadow-sm border border-slate-200 rounded-2xl p-6 sm:p-8 mb-8 transition-shadow hover:shadow-md">
-        <h2 className="text-xl font-semibold text-slate-800 mb-6 border-b border-slate-100 pb-4">
-          Create Problem
-        </h2>
-
-        <div className="space-y-6">
-          {/* Problem Details */}
-          <div className="space-y-5">
-            <input
-              type="text"
-              placeholder="Problem Title"
-              value={problemTitle}
-              onChange={(e) => setProblemTitle(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3.5 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none"
-            />
-
-            <textarea
-              placeholder="Problem Statement"
-              value={statement}
-              onChange={(e) => setStatement(e.target.value)}
-              rows={4}
-              className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3.5 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none resize-y"
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <select
-                value={difficulty}
-                onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3.5 transition-colors hover:border-slate-400 outline-none cursor-pointer"
-              >
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Hard">Hard</option>
-              </select>
-
-              <select
-                value={contestId}
-                onChange={(e) => setContestId(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3.5 transition-colors hover:border-slate-400 outline-none cursor-pointer"
-              >
-                <option value="">Select Contest</option>
-                {contests &&
-                  contests.map((contest) => (
-                    <option key={contest.id} value={contest.id}>
-                      {contest.title}
-                    </option>
-                  ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Example Test Cases Section */}
-          <div className="pt-6 border-t border-slate-100">
-            <h3 className="text-lg font-semibold text-slate-800 mb-5">
-              Sample Test Cases
-            </h3>
-
-            <div className="space-y-6">
-              {/* Example 1 */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h4 className="text-sm font-bold text-slate-600 uppercase tracking-wider mb-4 flex items-center">
-                  <span className="bg-emerald-100 text-emerald-700 w-6 h-6 rounded-full flex items-center justify-center mr-2">
-                    1
-                  </span>
-                  Example 1
-                </h4>
-                <div className="space-y-4">
-                  <textarea
-                    placeholder="Test Case Input"
-                    value={example1Input}
-                    onChange={(e) => setExample1Input(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Expected Output"
-                    value={example1Output}
-                    onChange={(e) => setExample1Output(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Explanation (Optional)"
-                    value={example1Explanation}
-                    onChange={(e) => setExample1Explanation(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Example 2 */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h4 className="text-sm font-bold text-slate-600 uppercase tracking-wider mb-4 flex items-center">
-                  <span className="bg-emerald-100 text-emerald-700 w-6 h-6 rounded-full flex items-center justify-center mr-2">
-                    2
-                  </span>
-                  Example 2
-                </h4>
-                <div className="space-y-4">
-                  <textarea
-                    placeholder="Test Case Input"
-                    value={example2Input}
-                    onChange={(e) => setExample2Input(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Expected Output"
-                    value={example2Output}
-                    onChange={(e) => setExample2Output(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Explanation (Optional)"
-                    value={example2Explanation}
-                    onChange={(e) => setExample2Explanation(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Example 3 */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h4 className="text-sm font-bold text-slate-600 uppercase tracking-wider mb-4 flex items-center">
-                  <span className="bg-emerald-100 text-emerald-700 w-6 h-6 rounded-full flex items-center justify-center mr-2">
-                    3
-                  </span>
-                  Example 3
-                </h4>
-                <div className="space-y-4">
-                  <textarea
-                    placeholder="Test Case Input"
-                    value={example3Input}
-                    onChange={(e) => setExample3Input(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Expected Output"
-                    value={example3Output}
-                    onChange={(e) => setExample3Output(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none font-mono"
-                  />
-                  <textarea
-                    placeholder="Explanation (Optional)"
-                    value={example3Explanation}
-                    onChange={(e) => setExample3Explanation(e.target.value)}
-                    rows={2}
-                    className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block p-3 transition-colors hover:border-slate-400 placeholder-slate-400 outline-none"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-slate-100 flex items-center">
-            <button
-              onClick={handleCreateProblem}
-              disabled={loading}
-              className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-emerald-300 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]"
-            >
-              {loading ? "Creating..." : "Create Problem"}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Available Contests Section */}
-      <div className="mt-10">
-        <h2 className="text-xl font-bold text-slate-800 mb-6 px-1">
-          Available Contests
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {contests &&
-            contests.map((contest) => (
-              <div
-                key={contest.id}
-                className="group relative bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:shadow-md hover:border-blue-400 transition-all duration-200 cursor-default flex items-center justify-between"
-              >
-                <span className="font-semibold text-slate-700 truncate group-hover:text-blue-600 transition-colors">
-                  {contest.title}
-                </span>
-                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-blue-50 transition-colors shrink-0 ml-3">
-                  <svg
-                    className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </div>
-            ))}
-        </div>
+        <button onClick={handleCreateContest} disabled={loading} className={btnBase}>
+          {loading ? "Creating..." : "Create Contest"}
+        </button>
       </div>
     </div>
-  );
+
+    {/* Create Problem */}
+    <div className={cardBase}>
+      <h2 className={sectionTitle}>Create Problem</h2>
+      <div className="space-y-4">
+        <input type="text" placeholder="Problem Title" value={problemTitle} onChange={(e) => setProblemTitle(e.target.value)} className={inputBase} />
+        <textarea placeholder="Problem Statement" value={statement} onChange={(e) => setStatement(e.target.value)} rows={4} className={inputBase} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className={inputBase}>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <select value={contestId} onChange={(e) => setContestId(e.target.value)} className={inputBase}>
+            <option value="">Select Contest</option>
+            {contests?.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+          </select>
+        </div>
+
+        {/* Sample Test Cases */}
+        <h3 className="text-lg font-semibold text-slate-800 pt-4">Sample Test Cases</h3>
+        <div className="space-y-4">
+          {[ 
+            { num: 1, i: example1Input, setI: setExample1Input, o: example1Output, setO: setExample1Output, e: example1Explanation, setE: setExample1Explanation },
+            { num: 2, i: example2Input, setI: setExample2Input, o: example2Output, setO: setExample2Output, e: example2Explanation, setE: setExample2Explanation },
+            { num: 3, i: example3Input, setI: setExample3Input, o: example3Output, setO: setExample3Output, e: example3Explanation, setE: setExample3Explanation }
+          ].map((tc) => (
+            <div key={tc.num} className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+              <h4 className="text-sm font-bold text-slate-600 mb-3">Example {tc.num}</h4>
+              <div className="grid gap-3">
+                <textarea placeholder="Input" value={tc.i} onChange={(e) => tc.setI(e.target.value)} rows={2} className={`${inputBase} font-mono`} />
+                <textarea placeholder="Output" value={tc.o} onChange={(e) => tc.setO(e.target.value)} rows={2} className={`${inputBase} font-mono`} />
+                <textarea placeholder="Explanation (Optional)" value={tc.e} onChange={(e) => tc.setE(e.target.value)} rows={1} className={inputBase} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <button onClick={handleCreateProblem} disabled={loading} className={`${btnBase} bg-emerald-600 hover:bg-emerald-700 mt-2`}>
+          {loading ? "Creating..." : "Create Problem"}
+        </button>
+      </div>
+    </div>
+
+    {/* Add Hidden Test Case (Previously Unstyled) */}
+    <div className={cardBase}>
+      <h2 className={sectionTitle}>Add Hidden Test Case</h2>
+      <div className="space-y-4">
+        <select value={problemId} onChange={(e) => setProblemId(e.target.value)} className={inputBase}>
+          <option value="">Select Problem</option>
+          {problems?.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
+        </select>
+        <textarea placeholder="Hidden Input" value={input} onChange={(e) => setInput(e.target.value)} rows={2} className={`${inputBase} font-mono`} />
+        <textarea placeholder="Expected Output" value={expectedOutput} onChange={(e) => setExpectedOutput(e.target.value)} rows={2} className={`${inputBase} font-mono`} />
+        <button onClick={handleCreateTestCase} className={`${btnBase} bg-purple-600 hover:bg-purple-700`}>
+          Add Test Case
+        </button>
+      </div>
+    </div>
+
+    {/* Available Contests */}
+    <div className="mt-8">
+      <h2 className="text-xl font-bold text-slate-800 mb-4">Available Contests</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {contests?.map((contest) => (
+          <div key={contest.id} className="bg-white border border-slate-200 p-4 rounded-lg shadow-sm hover:border-blue-400 flex items-center justify-between cursor-default transition-all">
+            <span className="font-semibold text-slate-700 truncate">{contest.title}</span>
+            <span className="text-blue-500 font-bold text-xl ml-2">→</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
 }
 
 export default AdminDashboard;
