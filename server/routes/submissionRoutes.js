@@ -36,6 +36,7 @@ router.post("/create", authMiddleware, async (req, res) => {
             data : {
                 code,
                 language,
+                verdict: "PENDING",
                 userId : req.user.id,
                 problemId : Number(problemId)
             }

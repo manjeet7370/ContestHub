@@ -33,6 +33,7 @@ using namespace std;
   }`,
   };
   const [code, setCode] = useState(templates["Python"]);
+  const [verdict, setVerdict] = useState("");
 
   useEffect(() => {
     const fetchContest = async () => {
@@ -75,6 +76,7 @@ using namespace std;
         },
       );
       console.log(res.data);
+      setVerdict(res.data.submmision.verdict);
     } catch (err) {
       console.log(err.res?.data);
     }
@@ -196,6 +198,11 @@ using namespace std;
               Submit Solution
             </button>
           </div>
+          {verdict && (
+            <div className="mx-5 mt-3 p-3 rounded-lg border bg-slate-50">
+              <span className="font-semibold">Verdict:</span> {verdict}
+            </div>
+          )}
 
           {/* Editor */}
           <div className="flex-grow bg-[#0f172a] p-5">
