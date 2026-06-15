@@ -20,11 +20,18 @@ const submitCode = async (
 };
 
 const getSubmissionResult = async (token) => {
+    try{
     const response = await axios.get(
-        `https://ce.judge0.com/submissions/${token}`
+        `https://ce.judge0.com/submissions/${token}?base64_encoded=true`
     );
 
+
     return response.data;
+} catch(err){
+    console.log("Judge0 Error:");
+    console.log(err.response?.data)
+    throw err;
+}
 }
 
 

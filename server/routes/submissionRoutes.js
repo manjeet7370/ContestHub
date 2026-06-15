@@ -41,42 +41,70 @@ router.post("/create", authMiddleware, async (req, res) => {
         }
         console.log(req.user);
 
-        const testCase = await prisma.testCase.findFirst({
+        const testCases = await prisma.testCase.findMany({
             where: {
                 problemId: Number(problemId),
                 isSample: false,
             }
         });
-        if(!testCase){
+        if(testCases.length == 0){
           return res.status(400).json({
             message: "No hidden test case found"
          });
         }
 
-        const token = await submitCode(
-            code,
-            languageId,
-            testCase.input
-        );
-        console.log("Judge0 Token: ", token);
+        // const token = await submitCode(
+        //     code,
+        //     languageId,
+        //     testCase.input
+        // );
+        // console.log("Judge0 Token: ", token);
 
-        await new Promise(resolve => 
-            setTimeout(resolve, 3000)
-        );
+        // await new Promise(resolve => 
+        //     setTimeout(resolve, 3000)
+        // );
 
-        const result = await getSubmissionResult(token);
+        // const result = await getSubmissionResult(token);
 
-        console.log("Expected Output:", testCase.expectedOutput);
-        console.log("Actual Output:", result.stdout);
-        console.log(result);
-        console.log("Language:", language);
-        console.log("Language ID:", languageId);
+        // console.log("Expected Output:", testCase.expectedOutput);
+        // console.log("Actual Output:", result.stdout);
+        // console.log(result);
+        // console.log("Language:", language);
+        // console.log("Language ID:", languageId);
 
         // console.log(result)
-        let verdict = "WRONG_ANSWER"
-        if(result.stdout?.trim() === testCase.expectedOutput.trim()){
-            verdict = "ACCEPTED";
+        let verdict = "ACCEPTED";
+        for(const testCase of testCases){
+            const  token = await submitCode(
+                code,
+                languageId,
+                testCase.input
+            );
+
+            await new Promise(resolve => 
+                setTimeout(resolve, 3000)
+            );
+
+            const result = await getSubmissionResult(token);
+            console.log(result)
+
+            if(result.compile_output){
+                verdict = "COMPILATION_ERROR "
+                break;
+            }
+
+            if(result.stderr){
+                verdict="RUNTIME_ERROR"
+                break;
+            }
+            console.log(result.status);
+            if(result.stdout?.trim() !== testCase.expectedOutput.trim()){
+                verdict = "WRONG_ANSWER";
+                break;
+            }
         }
+
+        console.log(verdict)
 
 
 
