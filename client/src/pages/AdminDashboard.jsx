@@ -14,7 +14,7 @@ function AdminDashboard() {
       const res = await api.get("/contest");
       console.log(res.data);
       setContests(res.data);
-      console.log(res.data.problem.testCases);
+      // console.log(res.data.problem.testCases);
     } catch (err) {
       console.log(err);
     }
