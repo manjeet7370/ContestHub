@@ -1,16 +1,6 @@
-﻿# ContestHub
+# ContestHub
 
-ContestHub is a full-stack coding contest platform inspired by competitive programming websites such as CodeChef and LeetCode. It allows users to participate in coding contests, solve programming problems, submit solutions, and track their submissions. The platform also provides an admin dashboard for managing contests, problems, and test cases.
-
----
-
-## Features
-
-### User Features
-
-* User Registration and Login usi# ContestHub
-
-ContestHub is a full-stack coding contest platform inspired by competitive programming websites such as CodeChef and LeetCode. It allows users to participate in coding contests, solve programming problems, submit solutions, and track their submissions. The platform also provides an admin dashboard for managing contests, problems, test cases, and submissions.
+ContestHub is a full-stack coding contest platform inspired by competitive programming websites such as CodeChef and LeetCode. It allows users to participate in coding contests, solve programming problems, submit solutions, and receive automated verdicts through an online judge system powered by Judge0.
 
 ---
 
@@ -26,6 +16,8 @@ ContestHub is a full-stack coding contest platform inspired by competitive progr
 * Solve Problems using Monaco Code Editor
 * Multi-language Code Templates (C++, Python, JavaScript)
 * Submit Solutions
+* Automatic Code Compilation and Execution
+* Real-Time Verdict Generation
 * View Submission History
 * View Submission Verdict Status
 
@@ -36,9 +28,23 @@ ContestHub is a full-stack coding contest platform inspired by competitive progr
 * Create Coding Contests
 * Create Problems
 * Associate Problems with Contests
-* Auto Create Sample Test Cases while Creating Problems
-* Add Hidden Test Cases
+* Create Sample Test Cases
+* Create Hidden Test Cases
 * Manage Contest Data
+
+---
+
+## Online Judge Features
+
+* Judge0 API Integration
+* Multi-Language Code Execution
+* Hidden Test Case Evaluation
+* Multiple Test Case Validation
+* Accepted Verdict
+* Wrong Answer Verdict
+* Compilation Error Verdict
+* Runtime Error Verdict
+* Automatic Verdict Storage in Database
 
 ---
 
@@ -58,6 +64,7 @@ ContestHub is a full-stack coding contest platform inspired by competitive progr
 * Express.js
 * JWT Authentication
 * bcrypt.js
+* Judge0 API
 
 ### Database
 
@@ -103,7 +110,6 @@ ContestHub is a full-stack coding contest platform inspired by competitive progr
 * verdict
 * userId
 * problemId
-* createdAt
 
 ### TestCase
 
@@ -162,33 +168,36 @@ ContestHub is a full-stack coding contest platform inspired by competitive progr
 * Admin Dashboard
 * Monaco Editor Integration
 * Submission System
-* Submission Verdict UI
 * Sample Test Case System
 * Hidden Test Case System
 * Problem Details Page
 * Sample Test Case Display
-* My Submissions Page
-* Login/Register Error Handling
+* Submission History API
 * PostgreSQL + Prisma Integration
-
-### In Progress
-
 * Judge0 Integration
-* Real-Time Code Execution
-* Automatic Verdict Generation
+* Multi-Language Code Execution
+* Multiple Hidden Test Case Validation
+* Accepted Verdict Generation
+* Wrong Answer Verdict Generation
+* Compilation Error Detection
+* Runtime Error Detection
+* Verdict Storage in Database
 
-### Planned Features
+---
 
-* Accepted / Wrong Answer Evaluation
+## Planned Features
+
+* Submission History Page UI
+* Verdict Color Indicators
+* Run Code with Custom Input
 * Contest Leaderboard
 * Contest Rankings
+* Contest Timer
 * Admin Analytics Dashboard
 * Edit Contest
 * Delete Contest
 * Edit Problem
 * Delete Problem
-* Run Code with Custom Input
-* Contest Timer
 
 ---
 
@@ -210,210 +219,10 @@ Register/Login
 → Read Statement & Examples
 → Write Code
 → Submit Solution
-→ View Verdict
-→ Track Submission History
-
----
-
-## Upcoming Milestone
-
-### Judge0 Integration
-
-* Execute User Code
-* Support Multiple Languages
-* Run Against Hidden Test Cases
-* Generate Accepted / Wrong Answer Verdicts
-* Store Final Results in Database
-
----
-
-## Author
-
-Manjeet Kumar
-
-B.Tech Mathematics and Computing
-IIIT Bhagalpur
-
-GitHub: https://github.com/manjeet7370
-ng JWT Authentication
-* Secure Protected Routes
-* Browse Available Coding Contests
-* View Contest Details and Problems
-* Solve Problems using Monaco Code Editor
-* Multi-language Code Templates (C++, Python, JavaScript)
-* Submit Solutions
-* View Submission History
-
-### Admin Features
-
-* Role-Based Access Control (ADMIN / USER)
-* Admin Dashboard
-* Create Coding Contests
-* Create Problems
-* Associate Problems with Contests
-* Create Sample Test Cases
-* Manage Contest Data
-
----
-
-## Tech Stack
-
-### Frontend
-
-* React.js
-* React Router DOM
-* Tailwind CSS
-* Axios
-* Monaco Editor
-
-### Backend
-
-* Node.js
-* Express.js
-* JWT Authentication
-* bcrypt
-
-### Database
-
-* PostgreSQL
-* Prisma ORM
-
----
-
-## Database Schema
-
-### User
-
-* id
-* name
-* email
-* password
-* role
-* createdAt
-
-### Contest
-
-* id
-* title
-* description
-* startTime
-* endTime
-* createdById
-
-### Problem
-
-* id
-* title
-* statement
-* difficulty
-* contestId
-* createdAt
-
-### Submission
-
-* id
-* code
-* language
-* verdict
-* userId
-* problemId
-
-### TestCase
-
-* id
-* input
-* expectedOutput
-* explanation
-* isSample
-* problemId
-* createdAt
-
----
-
-## Implemented APIs
-
-### Authentication
-
-* POST /api/auth/register
-* POST /api/auth/login
-
-### Contest
-
-* GET /api/contest
-* GET /api/contest/:id
-
-### Problem
-
-* GET /api/problem
-* GET /api/problem/:id
-
-### Submission
-
-* POST /api/submission/create
-* GET /api/submission/my
-
-### Admin
-
-* GET /api/admin/dashboard
-* POST /api/admin/contest/create
-* POST /api/admin/problem/create
-* POST /api/admin/testcase/create
-
----
-
-## Current Progress
-
-### Completed
-
-* Authentication System
-* JWT Authorization
-* Protected Routes
-* Contest Management
-* Problem Management
-* Submission System
-* Monaco Editor Integration
-* Admin Dashboard
-* Sample Test Case Architecture
-* PostgreSQL + Prisma Integration
-
-### In Progress
-
-* Auto Creation of Sample Test Cases while creating problems
-* Displaying Sample Test Cases on Problem Page
-* Improved Error Handling on Login/Register Pages
-
-### Planned Features
-
-* Hidden Test Cases
-* Judge0 Integration
-* Automatic Code Execution
-* Verdict Generation
-* Contest Leaderboard
-* Contest Rankings
-* Admin Analytics
-* Edit/Delete Contest
-* Edit/Delete Problem
-
----
-
-## Future Workflow
-
-Admin
-
-Create Contest
-→ Create Problem
-→ Add Sample Test Cases
-→ Add Hidden Test Cases
-
-User
-
-Register/Login
-→ Join Contest
-→ Solve Problem
-→ Submit Solution
-→ Run Against Test Cases
-→ Receive Verdict
-→ View Rankings
+→ Judge0 Executes Code
+→ Hidden Test Cases Run
+→ Verdict Generated
+→ View Submission History
 
 ---
 
