@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import { Navigate } from "react-router-dom";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         }
         /> 
       </Routes>
+      <Footer />
       
       </>
   );

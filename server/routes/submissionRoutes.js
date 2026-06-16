@@ -74,6 +74,7 @@ router.post("/create", authMiddleware, async (req, res) => {
 
         // console.log(result)
         let verdict = "ACCEPTED";
+        let errorMessage = null;
         for(const testCase of testCases){
             const  token = await submitCode(
                 code,
@@ -84,43 +85,80 @@ router.post("/create", authMiddleware, async (req, res) => {
             await new Promise(resolve => 
                 setTimeout(resolve, 3000)
             );
-
+           console.log("Language:", language);
+          console.log("Language ID:", languageId);
+         console.log("Code:", code);
             const result = await getSubmissionResult(token);
             console.log(result)
 
-            if(result.compile_output){
-                verdict = "COMPILATION_ERROR "
-                break;
-            }
+            // if(result.compile_output){
+            //     verdict = "COMPILATION_ERROR "
+            //     break;
+            // }
 
-            if(result.stderr){
-                verdict="RUNTIME_ERROR"
-                break;
-            }
+            // if(result.stderr){
+            //     verdict="RUNTIME_ERROR"
+            //     break;
+            // }
+if(result.status.id === 6){
+    verdict = "COMPILATION_ERROR";
+
+    errorMessage = Buffer.from(
+        result.compile_output,
+        "base64"
+    ).toString("utf-8");
+
+    break;
+}
+
+if(result.status.id === 11){
+    verdict = "RUNTIME_ERROR";
+
+    errorMessage = Buffer.from(
+        result.stderr,
+        "base64"
+    ).toString("utf-8");
+
+    break;
+}
             console.log(result.status);
-            if(result.stdout?.trim() !== testCase.expectedOutput.trim()){
-                verdict = "WRONG_ANSWER";
-                break;
-            }
+let actualOutput = "";
+
+if(result.stdout){
+    actualOutput = Buffer.from(
+        result.stdout,
+        "base64"
+    ).toString("utf-8");
+}
+
+console.log("Expected:", testCase.expectedOutput);
+console.log("Actual:", actualOutput);
+
+if(actualOutput.trim() !== testCase.expectedOutput.trim()){
+    verdict = "WRONG_ANSWER";
+    break;
+}
         }
 
         console.log(verdict)
 
+      
 
-
-        const submmision = await prisma.submission.create({
+        const submission = await prisma.submission.create({
             data : {
                 code,
                 language,
                 verdict,
+                errorMessage,
                 userId : req.user.id,
                 problemId : Number(problemId)
             }
         });
 
+
         return res.status(201).json({
             message : "Submission created successfully",
-            submmision
+            submission
         });
     }catch(err){
         console.log(err)

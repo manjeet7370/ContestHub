@@ -59,6 +59,7 @@ model Submission {
   code         String
   language     String
   verdict      String @default("PENDING")
+  errorMessage String?
 
   userId       Int
   problemId    Int
