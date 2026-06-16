@@ -9,6 +9,8 @@ function ProblemDeatils() {
   const [problem, setProblem] = useState(null);
   const [language, setLanguage] = useState("Python");
   const [loading, setLoading] = useState(false);
+  const [expectedOutput, setExpectedOutput] = useState("");
+  const [userOutput, setUserOutput] = useState("");
 
   const templates = {
     JavaScript: `function solve() {
@@ -82,10 +84,10 @@ using namespace std;
       // console.log(errorMessage);
       // console.log(res.data.submmision);
       const submission = res.data.submission;
-        setVerdict(submission.verdict);
-       setErrorMessage(submission.errorMessage);
-      
-       
+      setVerdict(submission.verdict);
+      setErrorMessage(submission.errorMessage);
+      setExpectedOutput(submission.expectedOutput);
+      setUserOutput(submission.userOutput);
     } catch (err) {
       console.log(err.res?.data);
     } finally {
@@ -204,6 +206,10 @@ using namespace std;
                   const setlectedLanguage = e.target.value;
                   setLanguage(setlectedLanguage);
                   setCode(templates[setlectedLanguage]);
+                  setVerdict("");
+                  setErrorMessage("");
+                  setExpectedOutput("");
+                  setUserOutput("");
                 }}
                 className="bg-slate-700 border border-slate-600 text-slate-200 text-xs rounded-md px-2.5 py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
               >
@@ -263,11 +269,36 @@ using namespace std;
               <span>{verdict}</span>
             </div>
           )}
-         {errorMessage && (
-  <pre className="text-red-400 text-xs whitespace-pre-wrap bg-slate-950 p-3 rounded mx-4 mb-2">
-    {errorMessage}
-  </pre>
-)}
+          {verdict === "WRONG_ANSWER" && (
+            <div className="bg-red-950/40 border border-red-800 rounded-lg p-4 mx-4 mt-3 mb-2">
+              <h3 className="font-semibold text-red-400 mb-3 text-sm">
+                Wrong Answer
+              </h3>
+
+              <div className="mb-2">
+                <span className="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
+                  Your Output
+                </span>
+                <pre className="text-red-300 text-xs font-mono bg-slate-950 px-3 py-2 rounded border border-slate-700 whitespace-pre-wrap overflow-x-auto">
+                  {userOutput}
+                </pre>
+              </div>
+
+              <div>
+                <span className="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
+                  Expected Output
+                </span>
+                <pre className="text-emerald-300 text-xs font-mono bg-slate-950 px-3 py-2 rounded border border-slate-700 whitespace-pre-wrap overflow-x-auto">
+                  {expectedOutput}
+                </pre>
+              </div>
+            </div>
+          )}
+          {errorMessage && (
+            <pre className="text-red-400 text-xs whitespace-pre-wrap bg-slate-950 p-3 rounded mx-4 mb-2">
+              {errorMessage}
+            </pre>
+          )}
 
           {/* Monaco Editor */}
           <div className="flex-1 min-h-0 bg-[#0f172a]">

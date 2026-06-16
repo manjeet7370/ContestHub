@@ -75,6 +75,8 @@ router.post("/create", authMiddleware, async (req, res) => {
         // console.log(result)
         let verdict = "ACCEPTED";
         let errorMessage = null;
+        let expectedOutput = null;
+let userOutput = null;
         for(const testCase of testCases){
             const  token = await submitCode(
                 code,
@@ -134,8 +136,11 @@ if(result.stdout){
 console.log("Expected:", testCase.expectedOutput);
 console.log("Actual:", actualOutput);
 
+
 if(actualOutput.trim() !== testCase.expectedOutput.trim()){
     verdict = "WRONG_ANSWER";
+    expectedOutput = testCase.expectedOutput;
+    userOutput = actualOutput;
     break;
 }
         }
@@ -150,6 +155,8 @@ if(actualOutput.trim() !== testCase.expectedOutput.trim()){
                 language,
                 verdict,
                 errorMessage,
+                expectedOutput,
+                userOutput,
                 userId : req.user.id,
                 problemId : Number(problemId)
             }
