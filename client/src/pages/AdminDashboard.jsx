@@ -12,11 +12,11 @@ function AdminDashboard() {
   const fetchContests = async () => {
     try {
       const res = await api.get("/contest");
-      console.log(res.data);
+      
       setContests(res.data);
       // console.log(res.data.problem.testCases);
     } catch (err) {
-      console.log(err);
+     
     }
   };
 
@@ -50,9 +50,9 @@ function AdminDashboard() {
       setDescription("");
       setStartTime("");
       setEndTime("");
-      console.log(res.data);
+      
     } catch (err) {
-      console.log(err);
+      
       alert(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
@@ -161,9 +161,9 @@ function AdminDashboard() {
       setExample3Output("");
       setExample3Explanation("");
 
-      console.log(res.data);
+      
     } catch (err) {
-      console.log(err);
+      
     }
   };
 
@@ -179,7 +179,7 @@ function AdminDashboard() {
 
       setProblems(res.data);
     } catch (err) {
-      console.log(err);
+      
     }
   };
 
@@ -209,9 +209,9 @@ function AdminDashboard() {
       setExpectedOutput("");
       setExplanation("");
 
-      console.log(res.data);
+      
     } catch (err) {
-      console.log(err);
+      
     }
   };
 

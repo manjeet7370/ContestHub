@@ -15,10 +15,10 @@ function MySubmissions() {
                     },
                 });
 
-                console.log(res.data)
+                
                 setSubmissions(res.data.submission);
             }catch(err){
-                console.log(err);
+                
             }
         };
     fetchSubmission();

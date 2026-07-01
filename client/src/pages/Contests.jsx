@@ -10,10 +10,10 @@ function Contests() {
         const fetchContests = async () => {
             try {
                 const res = await api.get("/contest");
-                console.log(res.data);
+                
                 setContest(res.data);
             }catch(err){
-                console.log(err)
+                
             }
         };
         fetchContests();

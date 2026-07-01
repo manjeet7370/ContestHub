@@ -73,7 +73,7 @@ router.post("/problem/create", authMiddleware, adminMiddleware, async(req, res) 
         });
 
     }catch(err){
-        console.log(err);
+       
 
         res.status(500).json({
             message: "Server Error",
@@ -113,7 +113,7 @@ router.post("/testcase/create", authMiddleware, adminMiddleware,
                 testCase,
             });
         }catch(err){
-            console.log(err);
+          
             res.status(500).json({
                 message: "Server Error",
             });

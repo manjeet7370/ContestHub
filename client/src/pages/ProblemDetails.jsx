@@ -47,7 +47,7 @@ using namespace std;
 
         setProblem(res.data.problem);
       } catch (err) {
-        console.log(err);
+        
       }
     };
     fetchContest();

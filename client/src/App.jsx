@@ -16,8 +16,10 @@ function App() {
     const user = JSON.parse(localStorage.getItem("user") || "null");
   
   return (
-    <>
-      <Navbar/>
+    <div className="min-h-screen flex flex-col">
+
+      <Navbar />
+        <div className="flex-1">
       <Routes>
         <Route path="/" element={<Contests/>} />
         <Route path="/contest/:id" element={<ContestsDeatils/>} />
@@ -34,9 +36,11 @@ function App() {
         }
         /> 
       </Routes>
+      </div>
+      
       <Footer />
       
-      </>
+      </div>
   );
 }
 

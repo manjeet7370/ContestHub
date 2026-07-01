@@ -28,8 +28,6 @@ const getSubmissionResult = async (token) => {
 
     return response.data;
 } catch(err){
-    console.log("Judge0 Error:");
-    console.log(err.response?.data)
     throw err;
 }
 }

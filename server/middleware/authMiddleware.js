@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 
 const authMiddlewere = (req, res, next) => {
     try{
-        console.log(req.headers.authorization);
+        
         const authHeader = req.headers.authorization;
        
         if(!authHeader){
@@ -23,7 +23,7 @@ const authMiddlewere = (req, res, next) => {
         
         next();
     }catch(err){
-        console.log(err)
+        
         return res.status(401).json({
             message: "Invalid Token",
         });

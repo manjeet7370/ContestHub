@@ -12,11 +12,11 @@ function ContestsDeatils() {
         const fetchContest = async () => {
             try {
                 const res = await api.get(`/contest/${id}`);
-                console.log(res.data.contest)
+               
          
                 setContest(res.data.contest)
             }catch(err){
-                console.log(err)
+                
             }
         };
 

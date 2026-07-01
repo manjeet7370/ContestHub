@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         
         return res.status(200).json(contests);
     }catch(err){
-        console.log(err);
+        
         
         return res.status(500).json({
             message: "Server Error",
@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
              contest
         })
     }catch(err){
-        console.log(err);
+        
 
         return res.status(500).json({
             message: "Server Error",
@@ -91,8 +91,7 @@ router.post("/create", authMiddleware, async(req, res) => {
             contest,
         });
     }catch(err){
-        console.log(err)
-
+        
         return res.status(500).json({
             message : "server error",
         });
@@ -113,7 +112,7 @@ router.get("/:id/problems", async (req , res) => {
             problems
         });
     }catch(err){
-        console.log(err)
+       
 
         return res.status(500).json({
             message: "Server Error"
